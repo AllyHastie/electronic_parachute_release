@@ -1,0 +1,68 @@
+//
+// !!! WARNING !!! AUTO-GENERATED FILE!
+// PLEASE DO NOT MODIFY IT AND USE "platformio.ini":
+// https://docs.platformio.org/page/projectconf/section_env_build.html#build-flags
+//
+{
+    "configurations": [
+        {
+            "name": "PlatformIO",
+            "includePath": [
+                "/Users/aliciahastie/electronic_parachute_release/include",
+                "/Users/aliciahastie/electronic_parachute_release/src",
+                "/Users/aliciahastie/.platformio/packages/framework-arduino-avr-mightycore/cores/MightyCore",
+                "/Users/aliciahastie/.platformio/packages/framework-arduino-avr-mightycore/variants/standard",
+                "/Users/aliciahastie/.platformio/packages/framework-arduino-avr-mightycore/libraries/AVR_examples/src",
+                "/Users/aliciahastie/.platformio/packages/framework-arduino-avr-mightycore/libraries/EEPROM/src",
+                "/Users/aliciahastie/.platformio/packages/framework-arduino-avr-mightycore/libraries/Optiboot_flasher/src",
+                "/Users/aliciahastie/.platformio/packages/framework-arduino-avr-mightycore/libraries/SD/src",
+                "/Users/aliciahastie/.platformio/packages/framework-arduino-avr-mightycore/libraries/SPI/src",
+                "/Users/aliciahastie/.platformio/packages/framework-arduino-avr-mightycore/libraries/SPI1/src",
+                "/Users/aliciahastie/.platformio/packages/framework-arduino-avr-mightycore/libraries/Servo/src",
+                "/Users/aliciahastie/.platformio/packages/framework-arduino-avr-mightycore/libraries/SoftwareSerial/src",
+                "/Users/aliciahastie/.platformio/packages/framework-arduino-avr-mightycore/libraries/Timer/src",
+                "/Users/aliciahastie/.platformio/packages/framework-arduino-avr-mightycore/libraries/Wire/src",
+                "/Users/aliciahastie/.platformio/packages/framework-arduino-avr-mightycore/libraries/Wire1/src",
+                ""
+            ],
+            "browse": {
+                "limitSymbolsToIncludedHeaders": true,
+                "path": [
+                    "/Users/aliciahastie/electronic_parachute_release/include",
+                    "/Users/aliciahastie/electronic_parachute_release/src",
+                    "/Users/aliciahastie/.platformio/packages/framework-arduino-avr-mightycore/cores/MightyCore",
+                    "/Users/aliciahastie/.platformio/packages/framework-arduino-avr-mightycore/variants/standard",
+                    "/Users/aliciahastie/.platformio/packages/framework-arduino-avr-mightycore/libraries/AVR_examples/src",
+                    "/Users/aliciahastie/.platformio/packages/framework-arduino-avr-mightycore/libraries/EEPROM/src",
+                    "/Users/aliciahastie/.platformio/packages/framework-arduino-avr-mightycore/libraries/Optiboot_flasher/src",
+                    "/Users/aliciahastie/.platformio/packages/framework-arduino-avr-mightycore/libraries/SD/src",
+                    "/Users/aliciahastie/.platformio/packages/framework-arduino-avr-mightycore/libraries/SPI/src",
+                    "/Users/aliciahastie/.platformio/packages/framework-arduino-avr-mightycore/libraries/SPI1/src",
+                    "/Users/aliciahastie/.platformio/packages/framework-arduino-avr-mightycore/libraries/Servo/src",
+                    "/Users/aliciahastie/.platformio/packages/framework-arduino-avr-mightycore/libraries/SoftwareSerial/src",
+                    "/Users/aliciahastie/.platformio/packages/framework-arduino-avr-mightycore/libraries/Timer/src",
+                    "/Users/aliciahastie/.platformio/packages/framework-arduino-avr-mightycore/libraries/Wire/src",
+                    "/Users/aliciahastie/.platformio/packages/framework-arduino-avr-mightycore/libraries/Wire1/src",
+                    ""
+                ]
+            },
+            "defines": [
+                "PLATFORMIO=60106",
+                "ARDUINO_AVR_ATmega324",
+                "F_CPU=16000000L",
+                "ARDUINO_ARCH_AVR",
+                "ARDUINO=10808",
+                "__AVR_ATmega324P__",
+                ""
+            ],
+            "cStandard": "c11",
+            "cppStandard": "c++17",
+            "compilerPath": "/Users/aliciahastie/.platformio/packages/toolchain-atmelavr/bin/avr-gcc",
+            "compilerArgs": [
+                "-mmcu=atmega324p",
+                ""
+            ]
+        }
+    ],
+    "version": 4
+}
