@@ -1,12 +1,16 @@
 #include <TinyGPS++.h>
+#include "gps.h"
 
 /******************************************************************************
-Function Name: XXXX
+Function Name: initGPS
 Initialise UART connection for GPS data transfer. 
     Input: N/A
     Output: N/A
 ******************************************************************************/
-
+void initGPS()
+{
+    ss.begin(GPSBaud);
+}
 
 /******************************************************************************
 Function Name: XXXX
