@@ -10,6 +10,14 @@ Initialise UART connection for GPS data transfer.
 
 /******************************************************************************
 Function Name: XXXX
+Read in altitude from GPS.
+    Input: N/A
+    Output: float altitude
+******************************************************************************/
+
+
+/******************************************************************************
+Function Name: XXXX
 Validate working connection with GPS.
     Input: N/A
     Output: boolean
