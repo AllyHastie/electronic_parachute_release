@@ -10,6 +10,7 @@
             "includePath": [
                 "/Users/aliciahastie/electronic_parachute_release/include",
                 "/Users/aliciahastie/electronic_parachute_release/src",
+                "/Users/aliciahastie/electronic_parachute_release/.pio/libdeps/esp32doit-devkit-v1/EspSoftwareSerial/src",
                 "/Users/aliciahastie/electronic_parachute_release/.pio/libdeps/esp32doit-devkit-v1/Adafruit ADXL343",
                 "/Users/aliciahastie/electronic_parachute_release/.pio/libdeps/esp32doit-devkit-v1/TinyGPSPlus/src",
                 "/Users/aliciahastie/electronic_parachute_release/.pio/libdeps/esp32doit-devkit-v1/Adafruit BMP280 Library",
@@ -246,6 +247,7 @@
                 "path": [
                     "/Users/aliciahastie/electronic_parachute_release/include",
                     "/Users/aliciahastie/electronic_parachute_release/src",
+                    "/Users/aliciahastie/electronic_parachute_release/.pio/libdeps/esp32doit-devkit-v1/EspSoftwareSerial/src",
                     "/Users/aliciahastie/electronic_parachute_release/.pio/libdeps/esp32doit-devkit-v1/Adafruit ADXL343",
                     "/Users/aliciahastie/electronic_parachute_release/.pio/libdeps/esp32doit-devkit-v1/TinyGPSPlus/src",
                     "/Users/aliciahastie/electronic_parachute_release/.pio/libdeps/esp32doit-devkit-v1/Adafruit BMP280 Library",
