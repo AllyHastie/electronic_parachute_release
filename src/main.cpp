@@ -1,7 +1,10 @@
 #include <Arduino.h>
-//HI
+#include "state_machine.h"
+
 void setup() {
   // put your setup code here, to run once:
+  state state = initState();
+  getNextState(&state);
 }
 
 void loop() {

@@ -1,23 +1,32 @@
-/* Stages of rocket during flight */
-enum class state {
-    STATE_ARMED, 
-    STATE_IGNITION,
-    STATE_APOGEE,
-    STATE_DESCENT,
-    STATE_LANDED,
-    STATE_ERROR
-};
+#include "state_machine.h"
 
-/* Function prototypes */
-bool getNextState (state *state);
+/******************************************************************************
+Function Name: initState
+Initialises new state variable to armed.
+    Input: N/A
+    Output: state
+******************************************************************************/
 
-/* State of rocket during flight */
-bool getNextState (state *state){
+state initState()
+{
+    return state::STATE_ARMED;
+}
+
+
+/******************************************************************************
+Function Name: getNextState
+Sets the next state and updates the value when a condition is met.
+    Input: state 
+    Output: int
+        0 - No error
+        1 - No reading and/or error
+******************************************************************************/
+int getNextState (state *state){
     switch(*state)
     {
         case state:: STATE_ARMED: 
             break;
-        case state:: STATE_IGNITION: 
+        case state:: STATE_ASCENT: 
             break;
         case state:: STATE_APOGEE: 
             break;
@@ -25,11 +34,10 @@ bool getNextState (state *state){
             break;
         default: 
             * state = state :: STATE_ERROR;
-            break;
-            
+            return 1;     
     }
 
-    return true;
+    return 0;
     
 }
 
