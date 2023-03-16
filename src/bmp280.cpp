@@ -17,7 +17,16 @@ Function reads in 100 readings from the barometer and averages readings to
 reduce noise. Kalmann filter also completes this function but may be too 
 complex for this application. 
     Input: N/A
-    Output: Average of 100 readings
+    Output: float avgAlt
+******************************************************************************/
+
+
+
+/******************************************************************************
+Function Name: XXXX
+Read in parachute deployment threshold and determine deployment altitude.
+    Input: int threshold, float armedAlt
+    Output: float deployAlt
 ******************************************************************************/
 
 
