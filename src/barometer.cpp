@@ -40,7 +40,7 @@ Read in parachute deployment threshold and determine deployment altitude.
 Function Name: XXXX
 Validate working connection with barometer.
     Input: N/A
-    Output: boolean
+    Output: int
         0 - No error
         1 - No reading and/or error
 ******************************************************************************/

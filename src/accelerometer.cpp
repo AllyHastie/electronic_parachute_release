@@ -3,28 +3,70 @@ Setup for ADXL343
 ******************************************************************************/
 
 #include <Adafruit_ADXL343.h>
+#include <Wire.h>
+#include "accelerometer.h"
 
 /******************************************************************************
-Function Name: XXXX
+Function Name: initAccel
 Initialise I2C connection for accelerometer data transfer. 
     Input: N/A
-    Output: N/A
-******************************************************************************/
-
-
-/******************************************************************************
-Function Name: XXXX
-Read in acceleration on multiple 
-    Input: N/A
-    Output: struct axisData
-******************************************************************************/
-
-
-/******************************************************************************
-Function Name: XXXX
-Validate working connection with accelerometer.
-    Input: N/A
-    Output: boolean
+    Output: int
         0 - No error
         1 - No reading and/or error
 ******************************************************************************/
+int initAccel()
+{
+    // initiates I2C connection
+    Wire.begin();
+
+    // initialises ADXL343 accelerometer
+    if(!accel.begin())
+    {
+        // if not found error flag set
+        return 1;
+    }
+    // sets range to +/- 16G
+    accel.setRange(ADXL343_RANGE_16_G);
+    // sets data rate to 100Hz
+    accel.setDataRate(ADXL343_DATARATE_100_HZ);
+    return 0; 
+
+}
+
+/******************************************************************************
+Function Name: getAxisAccel
+Read in acceleration on multiple 
+    Input: N/A
+    Output: axis
+******************************************************************************/
+axis getAxisAccel()
+{
+    // reads accelerometer data
+    sensors_event_t event;
+    accel.getEvent(&event);
+
+    // stores accelerometer data in class axis
+    axis axis = {event.acceleration.x, event.acceleration.y, event.acceleration.z};
+    // returns axis
+    return axis;
+}
+
+/******************************************************************************
+Function Name: isAccelValid
+Validate working connection with accelerometer.
+    Input: N/A
+    Output: int
+        0 - No error
+        1 - No reading and/or error
+******************************************************************************/
+int isAccelValid()
+{
+    // tests getRange() to confirm data is being transmitted
+    if (accel.getRange()!=0)
+    {
+        // data is being transmitted
+        return 0;
+    }
+    // error flag set
+    return 1;
+}
