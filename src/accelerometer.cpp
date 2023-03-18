@@ -6,6 +6,10 @@ Setup for ADXL343
 #include <Wire.h>
 #include "accelerometer.h"
 
+// initialises instance of ADXL343
+// int parsed is board I2C address, needs to be changed
+Adafruit_ADXL343 accel = Adafruit_ADXL343(53); 
+
 /******************************************************************************
 Function Name: initAccel
 Initialise I2C connection for accelerometer data transfer. 
@@ -14,7 +18,7 @@ Initialise I2C connection for accelerometer data transfer.
         0 - No error
         1 - No reading and/or error
 ******************************************************************************/
-int initAccel()
+int accelerometer::initAccel()
 {
     // initiates I2C connection
     Wire.begin();
@@ -39,7 +43,7 @@ Read in acceleration on multiple
     Input: N/A
     Output: axis
 ******************************************************************************/
-axis getAxisAccel()
+axis accelerometer::getAxisAccel()
 {
     // reads accelerometer data
     sensors_event_t event;
@@ -59,14 +63,14 @@ Validate working connection with accelerometer.
         0 - No error
         1 - No reading and/or error
 ******************************************************************************/
-int isAccelValid()
+int accelerometer::isAccelValid()
 {
-    // tests getRange() to confirm data is being transmitted
-    if (accel.getRange()!=0)
-    {
-        // data is being transmitted
-        return 0;
-    }
-    // error flag set
-    return 1;
-}
+     // tests getRange() to confirm data is being transmitted
+     if (accel.getRange()!=0)
+     {
+         // data is being transmitted
+         return 0;
+     }
+     // error flag set
+     return 1;
+ }

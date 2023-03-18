@@ -2,29 +2,29 @@
 #define gps_h
 
 #include <TinyGPSPlus.h>
-#include <SoftwareSerial.h>
+#include "SoftwareSerial.h"
 
 // sets pinout on board
-static const int RXPin = 4, TXPin = 3;
-static const uint32_t GPSBaud = 4800;
+static const int RXPin = 16, TXPin = 17;
+static const uint32_t GPSBaud = 9600;
 
 // struct to store latitude and longitude
 class coord {
     public: 
-        float latitude;
-        float longitude;
+        double latitude;
+        double longitude;
 };
 
-// instance of TinyGPSPlus
-TinyGPSPlus gps;
 
-// serial connection to GPS device
-SoftwareSerial ss(RXPin, TXPin);
-
-// function prototypes
-int initGPS();
-float getAlti();
-coord getCoord();
-int isGPSValid();
+class GPS {
+    public: 
+        // function prototypes
+        int initGPS();
+        float getAlti();
+        coord getCoord();
+        int isGPSValid();
+        int getHHMMSSCC();
+        int getSatellites();
+};
 
 #endif
