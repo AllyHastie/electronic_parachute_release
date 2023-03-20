@@ -12,11 +12,11 @@ struct axis {
 };
 
 class accelerometer{
+    private:
+        int isAccelValid();
     public:
-        // function prototypes
         int initAccel();
         axis getAxisAccel();
-        int isAccelValid();
 };
 
 
