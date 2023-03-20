@@ -18,63 +18,79 @@ int GPS::initGPS()
     return isGPSValid();
 }
 
-int GPS::getHHMMSSCC()
-{
-    while (gpsSerial.available()>0)
-    {
-        gpsH.encode(gpsSerial.read());
-    }
-    // returns altitude in meters
-    return gpsH.time.value();
-}
-
-int GPS::getSatellites()
-{
-    while (gpsSerial.available()>0)
-    {
-        gpsH.encode(gpsSerial.read());
-    }
-    // returns altitude in meters
-    return gpsH.satellites.value();
-}
-
 /******************************************************************************
-Function Name: getAlti
-Read in altitude from GPS.
+Function Name: readGPS
+Reads GPS data.
     Input: N/A
-    Output: float altitude
+    Output: GPSData Data
 ******************************************************************************/
-float GPS::getAlti()
+GPSData GPS::readGPS()
 {
-    while (gpsSerial.available()>0)
-    {
-        gpsH.encode(gpsSerial.read());
-    }
-    // returns altitude in meters
-    return gpsH.altitude.meters();
-}
+    while (gpsSerial.available() > 0)
+          if (gpsH.encode(gpsSerial.read()))
 
-/******************************************************************************
-Function Name: getCoord
-Read in latitude and longitude of rocket.
-    Input: N/A
-    Output: class coord
-******************************************************************************/
-coord GPS::getCoord()
-{
-    while(gpsH.location.isValid() == false)
-    {
-        while (gpsSerial.available()>0)
+          
+      if (millis() > 5000 && gpsH.charsProcessed() < 10)
         {
-            gpsH.encode(gpsSerial.read());
+         while(true);
         }
+        return storeData();
+        
+}
+
+/******************************************************************************
+Function Name: storeData
+Stores data from GPS in a struct. 
+    Input: N/A
+    Output: GPSData data
+******************************************************************************/
+
+GPSData GPS::storeData()
+{
+GPSData data;
+    if (gpsH.location.isValid())
+    {
+        data.location.latitude = gpsH.location.lat();
+        data.location.longitude = gpsH.location.lng();
+        data.location.altitude = gpsH.altitude.meters();
+    }
+    else
+    {
+        // invalid data
+        data.location.latitude = -1;
+        data.location.longitude = -1;
+        data.location.altitude = -1;
     }
 
-    // latitude and longitude stored in struct
-    coord coord = {gpsH.location.lat(), gpsH.location.lng()};
-    
-    // returns coord struct
-    return coord;
+    if (gpsH.date.isValid())
+    {
+        data.date.day = gpsH.date.day();
+        data.date.month = gpsH.date.month();
+        data.date.year = gpsH.date.year();
+    }
+    else
+    {
+        // invalid data
+        data.date.day = -1;
+        data.date.month = -1;
+        data.date.year = -1;
+    }
+
+    if (gpsH.time.isValid())
+    {   
+        data.time.hour = gpsH.time.hour();
+        data.time.minute = gpsH.time.minute();
+        data.time.second = gpsH.time.second();
+    }
+    else
+    {
+        // invalid data
+        data.time.hour = -1;
+        data.time.minute = -1;
+        data.time.second = -1;
+    }
+return data;
+delay(500);
 }
 
 /******************************************************************************
@@ -108,6 +124,8 @@ int GPS::isGPSValid()
     // error flagged
     return 1; 
 }
+
+
 
 
 
