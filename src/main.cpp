@@ -12,6 +12,5 @@ void setup() {
 }
 
 void loop() {
-  // This sketch displays information every time a new sentence is correctly encoded.
-
+  // put your setup code here, to run repeatedly:
 }
