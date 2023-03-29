@@ -2,6 +2,7 @@
 #define accelerometer_h
 
 #include <Adafruit_ADXL343.h>
+#include <Wire.h>
 
 // object to store x, y and z axis acceleration
 struct axis {

@@ -34,7 +34,8 @@ GPSData GPS::readGPS()
         {
          while(true);
         }
-        return storeData();
+
+    return storeData();
         
 }
 
@@ -52,14 +53,14 @@ GPSData data;
     {
         data.location.latitude = gpsH.location.lat();
         data.location.longitude = gpsH.location.lng();
-        data.location.altitude = gpsH.altitude.meters();
+        data.altitude = gpsH.altitude.meters();
     }
     else
     {
         // invalid data
         data.location.latitude = -1;
         data.location.longitude = -1;
-        data.location.altitude = -1;
+        data.altitude = -1;
     }
 
     if (gpsH.date.isValid())
@@ -90,7 +91,6 @@ GPSData data;
         data.time.second = -1;
     }
 return data;
-delay(500);
 }
 
 /******************************************************************************
