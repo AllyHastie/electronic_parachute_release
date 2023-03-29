@@ -1,28 +1,14 @@
 #include "state_machine.h"
 
 /******************************************************************************
-Function Name: initState
-Initialises new state variable to armed.
+Function Name: getNextState
+Sets the next state and updates the value when a condition is met.
     Input: N/A
     Output: state
 ******************************************************************************/
-
-state initState()
-{
-    return state::STATE_ARMED;
-}
-
-
-/******************************************************************************
-Function Name: getNextState
-Sets the next state and updates the value when a condition is met.
-    Input: state 
-    Output: int
-        0 - No error
-        1 - No reading and/or error
-******************************************************************************/
-int getNextState (state *state){
-    switch(*state)
+int getNextState (state prevState, state* state)
+{   
+    switch(prevState)
     {
         case state:: STATE_ARMED: 
             // if altitude is > previous altitude, change state
@@ -43,7 +29,6 @@ int getNextState (state *state){
             * state = state :: STATE_ERROR;
             return 1;     
     }
-
     return 0;
     
 }

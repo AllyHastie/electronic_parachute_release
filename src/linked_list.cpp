@@ -34,6 +34,10 @@ void linked_list :: addData(position newLocation, DDMMYY newDate, HHMMSS newTime
     newNode->acceleration.y = newAccel.y;
     newNode->acceleration.z = newAccel.z;
 
+    if(getPrevData()!=NULL)
+    {
+        getNextState(getPrevState(), &newNode->state);
+    }
     // sets previous and next location of linked list to NULL
     newNode->prev = NULL;
     newNode->next = NULL;
@@ -42,6 +46,7 @@ void linked_list :: addData(position newLocation, DDMMYY newDate, HHMMSS newTime
     if (head == NULL) {
         head = newNode;
         tail = newNode;
+        newNode->state = state::STATE_ARMED;
     } 
     else 
     {
@@ -61,7 +66,8 @@ Returns the data stored in the previous node
     Output: DataNode
 ******************************************************************************/
 
-DataNode* linked_list :: getPrevData() {
+DataNode* linked_list :: getPrevData() 
+{
     DataNode* currentNode = tail;
 
     if (currentNode == NULL || currentNode->prev == NULL) 
@@ -82,7 +88,8 @@ Returns the data stored in the nth position.
     Input: position
     Output: DataNode
 ******************************************************************************/
-DataNode* linked_list :: getNthPrevData(int n) {
+DataNode* linked_list :: getNthPrevData(int n) 
+{
     DataNode* currentNode = tail;
 
     for (int i = 0; i < n && currentNode != NULL; i++) 
@@ -94,3 +101,70 @@ DataNode* linked_list :: getNthPrevData(int n) {
     return currentNode;
 }
 
+
+
+/******************************************************************************
+Function Name: getPrevAltitude
+Returns the alitude stored in the previous position.
+    Input: N/A
+    Output: float
+******************************************************************************/
+float linked_list :: getPrevAltitude()
+{
+    return getPrevData()->altitude;
+}
+
+/******************************************************************************
+Function Name: getPrevAltitude
+Returns the acceleration datat stored in the previous position.
+    Input: N/A
+    Output: axis
+******************************************************************************/
+axis linked_list :: getPrevAccel()
+{
+    return getPrevData()->acceleration;
+}
+
+/******************************************************************************
+Function Name: getPrevState
+Returns the state stored in the previous position.
+    Input: N/A
+    Output: state
+******************************************************************************/
+state linked_list :: getPrevState()
+{
+    return getPrevData()->state;
+}
+
+/******************************************************************************
+Function Name: getAlitude
+Returns the altitude stored in the current position.
+    Input: N/A
+    Output: altitude
+******************************************************************************/
+float linked_list :: getAltitude()
+{
+    return tail->altitude;
+}
+
+/******************************************************************************
+Function Name: getAccel
+Returns the acceleration stored in the current position.
+    Input: N/A
+    Output: axis
+******************************************************************************/
+axis linked_list :: getAccel()
+{
+    return tail->acceleration;
+}
+
+/******************************************************************************
+Function Name: getState
+Returns the state stored in the current position.
+    Input: N/A
+    Output: state
+******************************************************************************/
+state linked_list :: getState()
+{
+    return tail->state;
+}
