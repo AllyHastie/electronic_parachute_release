@@ -1,9 +1,6 @@
 /******************************************************************************
 Setup for ADXL343
 ******************************************************************************/
-
-#include <Adafruit_ADXL343.h>
-#include <Wire.h>
 #include "accelerometer.h"
 
 // initialises instance of ADXL343

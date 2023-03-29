@@ -13,7 +13,6 @@ struct position {
     public:
         double latitude;
         double longitude;
-        double altitude;
 
 };
 
@@ -41,6 +40,7 @@ struct GPSData {
         position location;
         DDMMYY date;
         HHMMSS time;
+        float altitude;
 };
 
 
