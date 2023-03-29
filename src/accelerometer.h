@@ -3,14 +3,8 @@
 
 #include <Adafruit_ADXL343.h>
 #include <Wire.h>
+#include "global_variables.h"
 
-// object to store x, y and z axis acceleration
-struct axis {
-    public: 
-        float x;
-        float y;
-        float z;
-};
 
 class accelerometer{
     private:
