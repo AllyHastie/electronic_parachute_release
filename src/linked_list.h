@@ -17,10 +17,15 @@ struct DataNode {
 
 };
 
-DataNode* head = NULL;
-DataNode* tail = NULL;
+class linked_list
+{
+    private:
+        DataNode* head = NULL;
+        DataNode* tail = NULL;
+    public:
+        void addData(position newLocation, DDMMYY newDate, HHMMSS newTime, float newAltitude, axis newAccel);
+        DataNode* getNthPrevData(int n);
+        DataNode* getPrevData();
+};
 
-void addData(position newLocation, DDMMYY newDate, HHMMSS newTime, float newAltitude, axis newAccel);
-DataNode* getNthPrevData(int n);
-DataNode* getPrevData();
 #endif
