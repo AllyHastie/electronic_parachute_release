@@ -3,6 +3,8 @@
 
 #include <stdio.h>
 #include "global_variables.h"
+#include "state_machine.h"
+
 
 class linked_list
 {
@@ -16,9 +18,9 @@ class linked_list
         float getPrevAltitude();
         axis getPrevAccel();
         state getPrevState();
-        float getNthPrevAltitude(int n);
-        axis getNthPrevAccel(int n);
-        state getNthPrevState();
+        float getAltitude();
+        axis getAccel();
+        state getState();
 };
 
 #endif

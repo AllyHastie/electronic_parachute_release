@@ -6,9 +6,9 @@ Sets the next state and updates the value when a condition is met.
     Input: N/A
     Output: state
 ******************************************************************************/
-int getNextState (state* state)
+int getNextState (state prevState, state* state)
 {   
-    switch(*state)
+    switch(prevState)
     {
         case state:: STATE_ARMED: 
             // if altitude is > previous altitude, change state
@@ -29,7 +29,6 @@ int getNextState (state* state)
             * state = state :: STATE_ERROR;
             return 1;     
     }
-
     return 0;
     
 }
