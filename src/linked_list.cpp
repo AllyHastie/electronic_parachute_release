@@ -2,29 +2,14 @@
 
 /******************************************************************************
 Function Name: addData
-Stores gps latitude and longitude, date, time, altitude and acceleration into 
-the linked list
+Stores time, state altitude and acceleration into the linked list
     Input: position, date, time, altitude, acceleration
     Output: N/A
 ******************************************************************************/
 
-void linked_list :: addData(position newLocation, DDMMYY newDate, HHMMSS newTime, float newAltitude, axis newAccel) 
+void linked_list :: addData(float newAltitude, axis newAccel) 
 {
     DataNode* newNode = new DataNode;
-
-    // stores latitude and longitude data
-    newNode->location.latitude = newLocation.latitude;
-    newNode->location.longitude= newLocation.longitude;
-
-    // stores date data
-    newNode->date.day = newDate.day;
-    newNode->date.month = newDate.month;
-    newNode->date.year = newDate.year;
-
-    // stores time data
-    newNode->time.hour = newTime.hour;
-    newNode->time.minute = newTime.minute;
-    newNode->time.second = newTime.second;
 
     // stores altitude data
     newNode->altitude = newAltitude;
@@ -34,13 +19,20 @@ void linked_list :: addData(position newLocation, DDMMYY newDate, HHMMSS newTime
     newNode->acceleration.y = newAccel.y;
     newNode->acceleration.z = newAccel.z;
 
-    if(getPrevData()!=NULL)
+    if(tail!=NULL)
     {
-        getNextState(getPrevState(), &newNode->state);
+        getNextState(tail, newNode);
     }
     // sets previous and next location of linked list to NULL
     newNode->prev = NULL;
     newNode->next = NULL;
+
+    // due to memory limitations only X data points are stored in RAM
+    DataNode* tmpNode = getNthPrevData(dataStored);
+    if (tmpNode!=NULL)
+    {
+        delete tmpNode;
+    }
 
     // sets head and tail is linked list is NULL
     if (head == NULL) {

@@ -56,9 +56,6 @@ struct GPSData {
 // struct to store all data in linked list
 struct DataNode {
     public: 
-        position location;
-        DDMMYY date;
-        HHMMSS time;
         axis acceleration;
         float altitude;
         enum state state;
