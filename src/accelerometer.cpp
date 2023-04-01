@@ -5,7 +5,7 @@ Setup for ADXL343
 
 // initialises instance of ADXL343
 // int parsed is board I2C address, needs to be changed
-Adafruit_ADXL343 accel = Adafruit_ADXL343(53); 
+Adafruit_ADXL343 accel = Adafruit_ADXL343(accelAddress); 
 
 /******************************************************************************
 Function Name: initAccel

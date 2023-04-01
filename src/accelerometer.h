@@ -5,6 +5,7 @@
 #include <Wire.h>
 #include "global_variables.h"
 
+int accelAddress = 53;
 
 class accelerometer{
     private:

@@ -3,6 +3,6 @@
 
 #include "global_variables.h"
 
-int getNextState (state prevState, state* state);
+int getNextState (DataNode* prevState, DataNode* state);
 
 #endif
