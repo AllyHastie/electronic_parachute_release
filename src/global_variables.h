@@ -1,6 +1,9 @@
 #ifndef gloabl_variables_h
 #define gloabl_variables_h
 
+#include <stdint.h>
+#include <SoftwareSerial.h>
+
 enum class state {
     STATE_ARMED, 
     STATE_ASCENT,
@@ -19,10 +22,12 @@ struct axis {
 };
 
 // struct to store latitude, longitude and altitude
+// limited to 5 decimal places due to variable type
+// having a 6th decimal place allows up to 0.11m precision, which is not neccessary for this application
 struct position {
     public:
-        double latitude;
-        double longitude;
+        float latitude;
+        float longitude;
 
 };
 
@@ -50,18 +55,25 @@ struct GPSData {
         position location;
         DDMMYY date;
         HHMMSS time;
-        float altitude;
+        uint16_t altitude;
 };
 
-// struct to store all data in linked list
+// struct to store all data in circular buffer
 struct DataNode {
     public: 
         axis acceleration;
-        float altitude;
+        uint16_t altitude;
         enum state state;
-        DataNode* prev;
-        DataNode* next;
 
+};
+
+// struct to store data in non-volatile memory
+struct Data{
+    DDMMYY date;
+    HHMMSS time;
+    axis acceleration;
+    uint16_t altitude;
+    enum state state;
 };
 
 #endif

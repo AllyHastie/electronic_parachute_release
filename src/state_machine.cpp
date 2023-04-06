@@ -6,18 +6,16 @@ Sets the next state and updates the value when a condition is met.
     Input: N/A
     Output: state
 ******************************************************************************/
-int getNextState (DataNode* prevNode, DataNode* node)
+int getNextState (DataNode prevNode, DataNode* currentNode)
 {   
-    switch(prevNode->state)
+    switch(prevNode.state)
     {
         case state:: STATE_ARMED: 
             // if altitude is > previous altitude, change state
-            node->state = state :: STATE_ASCENT;
             break;
         case state:: STATE_ASCENT: 
             // if altitude is < previous altitude, change state
-            // if accelerated is not valid then skip to STATE_DESCENT
-            node->state = state :: STATE_ARMED;
+            // if accelerometer is not valid then skip to STATE_DESCENT
             break;
         case state:: STATE_APOGEE: 
             // store state of apogee
@@ -28,7 +26,7 @@ int getNextState (DataNode* prevNode, DataNode* node)
         case state:: STATE_LANDED: 
             break;
         default: 
-            node->state = state :: STATE_ERROR;
+            currentNode->state = state :: STATE_ERROR;
             return 1;     
     }
     return 0;
