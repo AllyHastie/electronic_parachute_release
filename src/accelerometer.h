@@ -5,7 +5,7 @@
 #include <Wire.h>
 #include "global_variables.h"
 
-int accelAddress = 53;
+int accelAddress = 53; // I2C address of accelerometer
 
 class accelerometer{
     private:

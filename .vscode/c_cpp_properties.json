@@ -10,6 +10,7 @@
             "includePath": [
                 "/Users/aliciahastie/electronic_parachute_release/include",
                 "/Users/aliciahastie/electronic_parachute_release/src",
+                "/Users/aliciahastie/.platformio/packages/framework-arduinoespressif32/libraries/EEPROM/src",
                 "/Users/aliciahastie/electronic_parachute_release/.pio/libdeps/esp32doit-devkit-v1/EspSoftwareSerial/src",
                 "/Users/aliciahastie/electronic_parachute_release/.pio/libdeps/esp32doit-devkit-v1/Adafruit ADXL343",
                 "/Users/aliciahastie/electronic_parachute_release/.pio/libdeps/esp32doit-devkit-v1/TinyGPSPlus/src",
@@ -214,7 +215,6 @@
                 "/Users/aliciahastie/.platformio/packages/framework-arduinoespressif32/libraries/BLE/src",
                 "/Users/aliciahastie/.platformio/packages/framework-arduinoespressif32/libraries/BluetoothSerial/src",
                 "/Users/aliciahastie/.platformio/packages/framework-arduinoespressif32/libraries/DNSServer/src",
-                "/Users/aliciahastie/.platformio/packages/framework-arduinoespressif32/libraries/EEPROM/src",
                 "/Users/aliciahastie/.platformio/packages/framework-arduinoespressif32/libraries/ESP32/src",
                 "/Users/aliciahastie/.platformio/packages/framework-arduinoespressif32/libraries/ESPmDNS/src",
                 "/Users/aliciahastie/.platformio/packages/framework-arduinoespressif32/libraries/Ethernet/src",
@@ -247,6 +247,7 @@
                 "path": [
                     "/Users/aliciahastie/electronic_parachute_release/include",
                     "/Users/aliciahastie/electronic_parachute_release/src",
+                    "/Users/aliciahastie/.platformio/packages/framework-arduinoespressif32/libraries/EEPROM/src",
                     "/Users/aliciahastie/electronic_parachute_release/.pio/libdeps/esp32doit-devkit-v1/EspSoftwareSerial/src",
                     "/Users/aliciahastie/electronic_parachute_release/.pio/libdeps/esp32doit-devkit-v1/Adafruit ADXL343",
                     "/Users/aliciahastie/electronic_parachute_release/.pio/libdeps/esp32doit-devkit-v1/TinyGPSPlus/src",
@@ -451,7 +452,6 @@
                     "/Users/aliciahastie/.platformio/packages/framework-arduinoespressif32/libraries/BLE/src",
                     "/Users/aliciahastie/.platformio/packages/framework-arduinoespressif32/libraries/BluetoothSerial/src",
                     "/Users/aliciahastie/.platformio/packages/framework-arduinoespressif32/libraries/DNSServer/src",
-                    "/Users/aliciahastie/.platformio/packages/framework-arduinoespressif32/libraries/EEPROM/src",
                     "/Users/aliciahastie/.platformio/packages/framework-arduinoespressif32/libraries/ESP32/src",
                     "/Users/aliciahastie/.platformio/packages/framework-arduinoespressif32/libraries/ESPmDNS/src",
                     "/Users/aliciahastie/.platformio/packages/framework-arduinoespressif32/libraries/Ethernet/src",
