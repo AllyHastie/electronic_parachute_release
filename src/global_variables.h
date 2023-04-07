@@ -58,20 +58,13 @@ struct GPSData {
         uint16_t altitude;
 };
 
-// struct to store all data in circular buffer
+// struct to store data
 struct DataNode {
     public: 
         axis acceleration;
-        uint16_t altitude;
+        float altitude;
         enum state state;
 
-};
-
-// struct to store data in non-volatile memory
-struct Data{
-    axis acceleration;
-    uint16_t altitude;
-    enum state state;
 };
 
 #endif
