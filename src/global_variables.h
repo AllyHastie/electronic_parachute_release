@@ -69,8 +69,6 @@ struct DataNode {
 
 // struct to store data in non-volatile memory
 struct Data{
-    DDMMYY date;
-    HHMMSS time;
     axis acceleration;
     uint16_t altitude;
     enum state state;
