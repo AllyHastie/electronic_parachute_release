@@ -5,4 +5,5 @@
 
 int getNextState (DataNode prevState, DataNode* state);
 
+
 #endif

@@ -6,7 +6,6 @@ Stores time, state altitude and acceleration into circular buffer
     Input: position, date, time, altitude, acceleration
     Output: N/A
 ******************************************************************************/
-
 void circular_buffer :: addData(float newAltitude, axis newAccel) 
 {
     DataNode newNode;
@@ -44,7 +43,6 @@ Returns the data stored in the previous node
     Input: N/A
     Output: DataNode
 ******************************************************************************/
-
 DataNode circular_buffer :: getPrevNode() 
 {
     // gets previous index
@@ -58,13 +56,13 @@ DataNode circular_buffer :: getPrevNode()
 
     return buffer[prevIndex];
 }
+
 /******************************************************************************
 Function Name: isEmpty
 Checks if previous node is 
     Input: DataNode
     Output: bool
 ******************************************************************************/
-
 bool circular_buffer :: isEmpty(DataNode node)
 {
     if(node.altitude!='\0' || node.acceleration.x !='\0' || node.acceleration.y !='\0' || node.acceleration.z !='\0')
