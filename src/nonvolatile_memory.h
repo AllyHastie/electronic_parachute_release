@@ -26,7 +26,6 @@ Data is stored in EEPROM in the following format:
                                             = 28 bytes 
 The ESP32 is capable of story 512 bytes so ~18 data entries
 ******************************************************************************/
-
 class NVM
 {
     public:

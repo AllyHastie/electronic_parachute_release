@@ -89,7 +89,6 @@ void NVM :: writeEEPROM(DataNode data, int* startAddress)
     EEPROM.end();
 }
 
-
 /******************************************************************************
 Function Name: readEEPROM
 Reads all data in CSV format.

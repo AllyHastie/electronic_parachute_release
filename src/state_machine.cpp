@@ -32,7 +32,3 @@ int getNextState (DataNode prevNode, DataNode* currentNode)
     return 0;
     
 }
-
-
-
-
