@@ -32,7 +32,7 @@ class NVM
         int startAddress = 0;
         void writeEEPROM(DataNode data, int* startAddress);
         void readEEPROM();
-        void  clearEEPROM();
+        void clearEEPROM();
 };
 
 #endif

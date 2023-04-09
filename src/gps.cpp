@@ -10,7 +10,7 @@ Initialise UART connection for GPS data transfer.
     Input: N/A
     Output: int
         0 - No error
-        1 - No reading and/or error
+        -1 - No reading and/or error
 ******************************************************************************/
 int GPS::initGPS()
 {
@@ -99,7 +99,7 @@ Validate working connection with GPS.
     Input: N/A
     Output: int
         0 - No error
-        1 - No reading and/or error
+        -1 - No reading and/or error
 ******************************************************************************/
 int GPS::isGPSValid()
 {
@@ -122,7 +122,7 @@ int GPS::isGPSValid()
         }
     }
     // error flagged
-    return 1; 
+    return -1; 
 }
 
 
