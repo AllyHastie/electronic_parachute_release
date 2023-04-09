@@ -42,5 +42,5 @@ Validate working connection with barometer.
     Input: N/A
     Output: int
         0 - No error
-        1 - No reading and/or error
+        -1 - No reading and/or error
 ******************************************************************************/

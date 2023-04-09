@@ -13,7 +13,7 @@ Initialise I2C connection for accelerometer data transfer.
     Input: N/A
     Output: int
         0 - No error
-        1 - No reading and/or error
+        -1 - No reading and/or error
 ******************************************************************************/
 int accelerometer::initAccel()
 {
@@ -24,7 +24,7 @@ int accelerometer::initAccel()
     if(!accel.begin())
     {
         // if not found error flag set
-        return 1;
+        return -1;
     }
     // sets range to +/- 16G
     accel.setRange(ADXL343_RANGE_16_G);
@@ -58,7 +58,7 @@ Validate working connection with accelerometer.
     Input: N/A
     Output: int
         0 - No error
-        1 - No reading and/or error
+        -1 - No reading and/or error
 ******************************************************************************/
 int accelerometer::isAccelValid()
 {
@@ -69,5 +69,5 @@ int accelerometer::isAccelValid()
          return 0;
      }
      // error flag set
-     return 1;
+     return -1;
  }
