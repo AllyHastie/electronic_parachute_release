@@ -64,15 +64,7 @@ void loop() {
 
   if (deployAltitude == 0 || deployAltitude == 1)
   {
-      for (int i = 0; i < 18; i++)
-      {
-        data.addData(i, ADXL343.getAxisAccel());
-      }
-      
-      readEEPROM();
-      deployAltitude=2;
-      
-      //readUser();
+      readUser();
   }
   else if (deployAltitude == -1)
   {
