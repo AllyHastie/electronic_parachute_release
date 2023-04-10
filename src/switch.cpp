@@ -83,33 +83,33 @@ int getSwitchState()
             return 1;
         // other cases determine altitude in meters
         case 0x02:
-            return 50;
+            return 2;
         case 0x03:
-            return 75;
+            return 3;
         case 0x04:
-            return 100;
+            return 4;
         case 0x05:
-            return 125;
+            return 5;
         case 0x06:
-            return 150;
+            return 6;
         case 0x07:
-            return 175;
+            return 7;
         case 0x08:
-            return 200;
+            return 8;
         case 0x09:
-            return 250;
+            return 9;
         case 0x0A:
-            return 300;
+            return 10;
         case 0x0B:
-            return 350;
+            return 11;
         case 0x0C:
-            return 400;
+            return 12;
         case 0x0D:
-            return 450;
+            return 13;
         case 0x0E:
-            return 500;
+            return 14;
         case 0x0F:
-            return 550;
+            return 15;
     }
     // error flag set
     return -1; 
