@@ -15,19 +15,13 @@ Definitions
 /******************************************************************************
 Data is stored in EEPROM in the following format:
     0 - (int) Time in milliseconds          - 4 bytes
-      - (char) Semicolon delimiter          - 1 byte
     1 - (short int) State stored as int     - 2 bytes
-      - (char) Semicolon delimiter          - 1 byte
     2 - (float) Acceleration on X axis      - 4 bytes
-      - (char) Semicolon delimiter          - 1 byte
     3 - (float) Acceleration on Y axis      - 4 bytes
-      - (char) Semicolon delimiter          - 1 byte
     4 - (float) Acceleration on Z axis      - 4 bytes
-      - (char) Semicolon delimiter          - 1 byte
     5 - (float) Altitude stored in meters   - 4 bytes
-      - (char) Semicolon delimiter          - 1 byte
-                                            = 28 bytes 
-The ESP32 is capable of story 512 bytes so ~18 data entries
+                                            = 22 bytes 
+The ESP32 is capable of story 512 bytes so ~23 data entries
 ******************************************************************************/
 class NVM
 {

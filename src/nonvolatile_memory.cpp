@@ -19,10 +19,6 @@ void NVM :: writeEEPROM(DataNode data, int* startAddress)
     EEPROM.writeInt(*startAddress, millis());
     *startAddress += sizeof(int);
 
-    // writes delimiter to EEPROM
-    EEPROM.writeChar(*startAddress, ';');
-    *startAddress += sizeof(char);
-
     // writes state as integer to EEPROM
     switch(data.state)
     {
@@ -48,10 +44,6 @@ void NVM :: writeEEPROM(DataNode data, int* startAddress)
     }
     *startAddress += sizeof(short int);
 
-    // writes delimiter to EEPROM
-    EEPROM.writeChar(*startAddress, ';');
-    *startAddress += sizeof(char);
-
     // writes acceleration and alititude to EEPROM
     for (int i = 0; i < 4; i++)
     {
@@ -72,17 +64,8 @@ void NVM :: writeEEPROM(DataNode data, int* startAddress)
         }
 
         // check for null and unset variables
-        if(tmp != '\0' && tmp != -1)
-        {
-
-            EEPROM.writeFloat(*startAddress, tmp);
-            *startAddress += sizeof(float);
-        }
-
-        // writes delimiter to EEPROM
-        EEPROM.writeChar(*startAddress, ';');
-        *startAddress += sizeof(char);
-
+        EEPROM.writeFloat(*startAddress, tmp);
+        *startAddress += sizeof(float);
     }
 
     EEPROM.commit();
@@ -110,55 +93,47 @@ void readEEPROM()
     {
         for(int i = 0; i < NUM_VARIABLES; i++)
         {
-            char tmp = EEPROM.readChar(start);
-            if(tmp == ';')
+
+            if(i == TIME_INDEX)
             {
-                Serial.print(tmp);
-                start += sizeof(char);
+                Serial.print(EEPROM.readInt(start));
+                start += sizeof(int);
+            }
+            else if(i == STATE_INDEX)
+            {
+                int state = EEPROM.readShort(start);
+                switch(state)
+                {
+                    case 1: 
+                        Serial.print("ARMED");
+                        break;
+                    case 2: 
+                        Serial.print("ASCENT");
+                        break;
+                    case 3: 
+                        Serial.print("APOGEE");
+                        break;
+                    case 4: 
+                        Serial.print("DESCENT");
+                        break;
+                    case 5: 
+                        Serial.print("LANDED");
+                        break;
+                    case 0: 
+                        Serial.print("ERROR");
+                        break;
+                }
+                start += sizeof(short int);
             }
             else
             {
-                if(i == TIME_INDEX)
-                {
-                    Serial.print(EEPROM.readInt(start));
-                    start += sizeof(int);
-                }
-                else if(i == STATE_INDEX)
-                {
-                    int state = EEPROM.readShort(start);
-                    switch(state)
-                    {
-                        case 1: 
-                            Serial.print("ARMED");
-                            break;
-                        case 2: 
-                            Serial.print("ASCENT");
-                            break;
-                        case 3: 
-                            Serial.print("APOGEE");
-                            break;
-                        case 4: 
-                            Serial.print("DESCENT");
-                            break;
-                        case 5: 
-                            Serial.print("LANDED");
-                            break;
-                        case 0: 
-                            Serial.print("ERROR");
-                            break;
-                    }
-                    start += sizeof(short int);
-
-                } 
-                else
-                {
-                    Serial.print(EEPROM.readFloat(start));
-                    start += sizeof(float);
-                }
-                Serial.print((char) EEPROM.readChar(start));
-                start += sizeof(char);
+                Serial.print(EEPROM.readFloat(start));
+                start += sizeof(float);
             }
-        
+            if(i < (NUM_VARIABLES-1))
+            {
+            Serial.print(';');
+            }
         }
         Serial.println();
     }
