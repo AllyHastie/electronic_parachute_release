@@ -3,10 +3,6 @@ Setup for ADXL343
 ******************************************************************************/
 #include "accelerometer.h"
 
-// initialises instance of ADXL343
-// int parsed is board I2C address, needs to be changed
-Adafruit_ADXL343 accel = Adafruit_ADXL343(accelAddress); 
-
 /******************************************************************************
 Function Name: initAccel
 Initialise I2C connection for accelerometer data transfer. 

@@ -5,15 +5,16 @@
 #include <Wire.h>
 #include "global_variables.h"
 
-// I2C address of accelerometer
-int accelAddress = 53; 
-
 class accelerometer{
-    private:
-        int isAccelValid();
     public:
+        accelerometer(int address) : accelAddress(address) {};
         int initAccel();
         axis getAxisAccel();
+        
+    private:
+        int accelAddress;
+        Adafruit_ADXL343 accel = Adafruit_ADXL343(accelAddress); 
+        int isAccelValid();
 };
 
 
