@@ -13,6 +13,10 @@ void initSwitch()
     pinMode(switchPin2, INPUT);
     pinMode(switchPin3, INPUT);
     pinMode(switchPin4, INPUT);
+
+    // initialises LED pin as output
+    pinMode(LED, OUTPUT);
+    digitalWrite(LED, LOW);
 }
 
 /******************************************************************************
@@ -30,6 +34,35 @@ byte readSwitch()
 }
 
 /******************************************************************************
+Function Name: blinkLED
+Users are given 1 minute to set switch to preferred position. LED blinks 
+during this time, indicating time left by speed of the blinks.
+    Input: N/A
+    Output: N/A
+******************************************************************************/
+void blinkLED()
+{
+    int startTime = millis();
+    while(millis() - startTime < totalTime)
+    {
+        // turn on LED
+        digitalWrite(LED, HIGH);
+        delay(200);
+
+        // turn off LED
+        digitalWrite(LED, LOW);
+        if(millis() - startTime >= (totalTime - fastBlinkTime))
+        {
+            delay(50);
+        }
+        else
+        {
+            delay(800);
+        }
+    }
+}
+
+/******************************************************************************
 Function Name: getSwitchState
 Returns altitude based on switch position. Switch position 0 or 1 is used for 
 setup. Switch position 2 - F is returns altitude deployment threshold.
@@ -38,6 +71,7 @@ setup. Switch position 2 - F is returns altitude deployment threshold.
 ******************************************************************************/
 int getSwitchState()
 {
+    blinkLED();
     byte switchVal = readSwitch();
     switch(switchVal)
     {
