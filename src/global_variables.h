@@ -4,6 +4,9 @@
 #include <stdint.h>
 #include <SoftwareSerial.h>
 
+extern int deployAltitude;
+extern int timeOfAscent;
+
 enum class state {
     STATE_ARMED, 
     STATE_ASCENT,

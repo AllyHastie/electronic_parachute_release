@@ -4,6 +4,9 @@
 #include <EEPROM.h>
 #include "global_variables.h"
 
+/******************************************************************************
+Definitions
+******************************************************************************/
 #define EEPROM_SIZE 512 // EEPROM size
 #define NUM_VARIABLES 6 // number of variables being read to EEPROM
 #define TIME_INDEX 0 // index of time in struct
@@ -28,11 +31,12 @@ The ESP32 is capable of story 512 bytes so ~18 data entries
 ******************************************************************************/
 class NVM
 {
-    public:
-        int startAddress = 0;
-        void writeEEPROM(DataNode data, int* startAddress);
-        void readEEPROM();
-        void clearEEPROM();
+  public:
+    int startAddress = 0;
+    void writeEEPROM(DataNode data, int* startAddress);
 };
+
+void readEEPROM();
+void clearEEPROM();
 
 #endif

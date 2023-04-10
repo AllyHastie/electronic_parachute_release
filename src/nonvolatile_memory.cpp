@@ -95,7 +95,7 @@ Reads all data in CSV format.
     Input: N/A
     Output: N/A
 ******************************************************************************/
-void NVM :: readEEPROM()
+void readEEPROM()
 {
     // initialises start address as 0 to read from EEPROM
     int start = 0;
@@ -172,7 +172,7 @@ Clears all data in EEPROM.
     Input: N/A
     Output: N/A
 ******************************************************************************/
-void NVM :: clearEEPROM()
+void clearEEPROM()
 {
     EEPROM.begin(EEPROM_SIZE);
     for (int i = 0 ; i < EEPROM_SIZE ; i++) 
