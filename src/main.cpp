@@ -10,6 +10,7 @@
 Definitions
 ******************************************************************************/
 #define accelAddress 53
+#define ESTIMATE_FLIGHT_TIME 9e6
 
 /******************************************************************************
 Function Prototypes
@@ -68,7 +69,7 @@ void loop() {
   else if (deployAltitude == -1)
   {
     // if no reading on all sensors parachute is deployed after 1.5 minutes
-    if(millis() - timeOfAscent > 9e4)
+    if(millis() - timeOfAscent > ESTIMATE_FLIGHT_TIME)
     { 
       // open servo
     }
