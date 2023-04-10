@@ -1,9 +1,6 @@
 #ifndef gloabl_variables_h
 #define gloabl_variables_h
 
-#include <stdint.h>
-#include <SoftwareSerial.h>
-
 extern int deployAltitude;
 extern int timeOfAscent;
 
@@ -58,7 +55,7 @@ struct GPSData {
         position location;
         DDMMYY date;
         HHMMSS time;
-        uint16_t altitude;
+        float altitude;
 };
 
 // struct to store data

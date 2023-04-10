@@ -11,64 +11,67 @@ void NVM :: writeEEPROM(DataNode data, int* startAddress)
     // initialises EEPROM
     EEPROM.begin(EEPROM_SIZE);
 
-    // initialises temporary vairables
-    float tmp;
-    int dataSize;
-
-    // writes time in milliseconds to EEPROM
-    EEPROM.writeInt(*startAddress, millis());
-    *startAddress += sizeof(int);
-
-    // writes state as integer to EEPROM
-    switch(data.state)
+    if (*startAddress <= (EEPROM_SIZE - STRUCT_SIZE))
     {
-        case state :: STATE_ARMED:
-            EEPROM.writeShort(*startAddress, 1);
-            break;
-        case state :: STATE_ASCENT:
-            EEPROM.writeShort(*startAddress, 2);
-            break;
-        case state :: STATE_APOGEE:
-            EEPROM.writeShort(*startAddress, 3);
-            break;
-        case state :: STATE_DESCENT:
-            EEPROM.writeShort(*startAddress, 4);
-            break;
-        case state :: STATE_ERROR:
-            EEPROM.writeShort(*startAddress, 0);
-            break;
-        default:
-            EEPROM.writeShort(*startAddress, 0);
+        // initialises temporary vairables
+        float tmp;
+        int dataSize;
 
-            
-    }
-    *startAddress += sizeof(short int);
+        // writes time in milliseconds to EEPROM
+        EEPROM.writeInt(*startAddress, millis());
+        *startAddress += sizeof(int);
 
-    // writes acceleration and alititude to EEPROM
-    for (int i = 0; i < 4; i++)
-    {
-        switch(i)
+        // writes state as integer to EEPROM
+        switch(data.state)
         {
-            case 0:
-                tmp = data.acceleration.x;
+            case state :: STATE_ARMED:
+                EEPROM.writeShort(*startAddress, 1);
                 break;
-            case 1:
-                tmp = data.acceleration.y;
+            case state :: STATE_ASCENT:
+                EEPROM.writeShort(*startAddress, 2);
                 break;
-            case 2:
-                tmp = data.acceleration.z;
+            case state :: STATE_APOGEE:
+                EEPROM.writeShort(*startAddress, 3);
                 break;
-            case 3:
-                tmp = data.altitude;
+            case state :: STATE_DESCENT:
+                EEPROM.writeShort(*startAddress, 4);
                 break;
+            case state :: STATE_ERROR:
+                EEPROM.writeShort(*startAddress, 0);
+                break;
+            default:
+                EEPROM.writeShort(*startAddress, 0);
+
+                
+        }
+        *startAddress += sizeof(short int);
+
+        // writes acceleration and alititude to EEPROM
+        for (int i = 0; i < NUM_FLOAT; i++)
+        {
+            switch(i)
+            {
+                case 0:
+                    tmp = data.acceleration.x;
+                    break;
+                case 1:
+                    tmp = data.acceleration.y;
+                    break;
+                case 2:
+                    tmp = data.acceleration.z;
+                    break;
+                case 3:
+                    tmp = data.altitude;
+                    break;
+            }
+
+            // check for null and unset variables
+            EEPROM.writeFloat(*startAddress, tmp);
+            *startAddress += sizeof(float);
         }
 
-        // check for null and unset variables
-        EEPROM.writeFloat(*startAddress, tmp);
-        *startAddress += sizeof(float);
+        EEPROM.commit();
     }
-
-    EEPROM.commit();
     EEPROM.end();
 }
 

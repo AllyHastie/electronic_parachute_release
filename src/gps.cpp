@@ -107,7 +107,7 @@ int GPS::isGPSValid()
     unsigned long startTime = millis();
 
     // Timeout after 5 seconds
-    while (millis() - startTime < 5000)  
+    while (millis() - startTime < TIMEOUT)  
     {
         while (gpsSerial.available() > 0)
         {
