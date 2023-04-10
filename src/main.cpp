@@ -1,4 +1,4 @@
-#include <Arduino.h>
+#include "SoftwareSerial.h"
 #include "global_variables.h"
 #include "accelerometer.h"
 #include "gps.h"
@@ -10,7 +10,7 @@
 Definitions
 ******************************************************************************/
 #define accelAddress 53
-#define ESTIMATE_FLIGHT_TIME 9e6
+#define ESTIMATE_FLIGHT_TIME 9e4
 
 /******************************************************************************
 Function Prototypes
@@ -115,7 +115,7 @@ void readUser()
       {
         Serial.println("Unknown command. Please enter: ");
         Serial.println("    read  - to read data from EEPROM");
-        Serial.println("    clear - to clear data from EEPROM");
+        Serial.println("    clear - to clear data in EEPROM");
         Serial.println();
       }
     }

@@ -9,8 +9,10 @@ Definitions
 ******************************************************************************/
 #define EEPROM_SIZE 512 // EEPROM size
 #define NUM_VARIABLES 6 // number of variables being read to EEPROM
+#define NUM_FLOAT 4 // number of floats being read to EEPROM
 #define TIME_INDEX 0 // index of time in struct
 #define STATE_INDEX 1 // index of state in struct
+#define STRUCT_SIZE 22 // data used when storing struct (bytes)
 
 /******************************************************************************
 Data is stored in EEPROM in the following format:

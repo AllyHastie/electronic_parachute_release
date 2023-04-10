@@ -5,6 +5,8 @@
 #include "SoftwareSerial.h"
 #include "global_variables.h"
 
+#define TIMEOUT 5e3 // 5 second timeout
+
 /******************************************************************************
 Sets pinout on board
 ******************************************************************************/

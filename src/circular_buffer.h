@@ -5,12 +5,15 @@
 #include "nonvolatile_memory.h"
 #include "state_machine.h"
 
-// store in EEPROM every 8 seconds
-#define readTime 8e3
-
 /******************************************************************************
 Definitions
 ******************************************************************************/
+// store in EEPROM every 6 seconds
+// based on 2 minute flight time
+// time / number of writes to EEPROM
+// [120, 150] / 23 = [5.21, 6.52]
+#define readTime 6e3
+
 #define BUFFER_SIZE 5 // number of nodes stores in buffer
 
 
