@@ -4,6 +4,9 @@
 #include "global_variables.h"
 #include "state_machine.h"
 
+/******************************************************************************
+Definitions
+******************************************************************************/
 #define BUFFER_SIZE 5 // number of nodes stores in buffer
 
 
