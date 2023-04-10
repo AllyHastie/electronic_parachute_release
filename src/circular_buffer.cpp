@@ -36,7 +36,7 @@ void circular_buffer :: addData(float newAltitude, axis newAccel)
     buffer[head]= newNode;
 
     // stores node in EEPROM if conditions are met
-    if (newNode.state != state :: STATE_LANDED || newNode.state != state :: STATE_LANDED)
+    if (newNode.state != state :: STATE_ARMED || newNode.state != state :: STATE_LANDED)
     {
         if (millis() - prevStore >= readTime)
         {
