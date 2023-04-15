@@ -14,6 +14,8 @@ Initialise UART connection for GPS data transfer.
 ******************************************************************************/
 int GPS::initGPS()
 {
+    pinMode(RXPin, INPUT);
+    pinMode(TXPin, OUTPUT);
     gpsSerial.begin(GPSBaud);
     return isGPSValid();
 }
@@ -26,15 +28,12 @@ Reads GPS data.
 ******************************************************************************/
 GPSData GPS::readGPS()
 {
-    while (gpsSerial.available() > 0)
-          if (gpsH.encode(gpsSerial.read()))
-
-          
-      if (millis() > 5000 && gpsH.charsProcessed() < 10)
-        {
-         while(true);
-        }
-
+    unsigned long start = millis();
+    do 
+    {
+        while (gpsSerial.available())
+        gpsH.encode(gpsSerial.read());
+    } while (millis() - start < 1000);
     return storeData();
         
 }
@@ -94,6 +93,20 @@ return data;
 }
 
 /******************************************************************************
+Function Name: getAltitude
+Reads altidue from GPS data.
+    Input: N/A
+    Output: float altitude
+******************************************************************************/
+float GPS::getAltitude()
+{
+    GPSData data = readGPS();
+
+    return data.altitude;
+}
+
+
+/******************************************************************************
 Function Name: isGPSValid
 Validate working connection with GPS.
     Input: N/A
@@ -107,7 +120,7 @@ int GPS::isGPSValid()
     unsigned long startTime = millis();
 
     // Timeout after 5 seconds
-    while (millis() - startTime < TIMEOUT)  
+    while (millis() - startTime < (TIMEOUT * 1000))  
     {
         while (gpsSerial.available() > 0)
         {
