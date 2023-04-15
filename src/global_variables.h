@@ -2,6 +2,7 @@
 #define gloabl_variables_h
 
 extern int deployAltitude;
+extern int startAltitude;
 extern int timeOfAscent;
 
 enum class state {

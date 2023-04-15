@@ -5,7 +5,7 @@
 #include "SoftwareSerial.h"
 #include "global_variables.h"
 
-#define TIMEOUT 5e3 // 5 second timeout
+#define TIMEOUT 5 // 5 second timeout
 
 /******************************************************************************
 Sets pinout on board
@@ -20,6 +20,7 @@ class GPS {
     public: 
         int initGPS();
         GPSData readGPS();
+        float getAltitude();
 };
 
 #endif

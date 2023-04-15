@@ -12,10 +12,11 @@ Definitions
 // based on 2 minute flight time
 // time / number of writes to EEPROM
 // [120, 150] / 23 = [5.21, 6.52]
-#define readTime 6e3
+#define readTime 6 // seconds
 
 #define BUFFER_SIZE 5 // number of nodes stores in buffer
 
+#include "SoftwareSerial.h"
 
 class circular_buffer
 {
@@ -27,7 +28,10 @@ class circular_buffer
     public:
         void addData(float newAltitude, axis newAccel);
         DataNode getPrevNode();
+        float getNthPrevAltitude(int n);
         bool isEmpty(DataNode node);
 };
+
+void printData(DataNode data);
 
 #endif

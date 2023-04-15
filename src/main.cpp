@@ -1,4 +1,4 @@
-#include "SoftwareSerial.h"
+#include <Arduino.h>
 #include "global_variables.h"
 #include "accelerometer.h"
 #include "gps.h"
@@ -9,8 +9,9 @@
 /******************************************************************************
 Definitions
 ******************************************************************************/
-#define accelAddress 53
-#define ESTIMATE_FLIGHT_TIME 9e4
+#define ACCELEROMETER_ADDRESS 53
+#define ESTIMATE_FLIGHT_TIME 1.5 // minutes
+#define READ_TIME 500 // milliseconds
 
 /******************************************************************************
 Function Prototypes
@@ -21,19 +22,21 @@ void readUser();
 Initialise Variables
 ******************************************************************************/
 int deployAltitude;
+int startAltitude = 0;
 int timeOfAscent = 0;
+double prevTime = 0;
 
 /******************************************************************************
 Initialise Classes
 ******************************************************************************/
-accelerometer ADXL343(accelAddress);
+accelerometer ADXL343(ACCELEROMETER_ADDRESS);
 GPS LM80_M39;
 circular_buffer data;
 
 
 void setup() {
   // put your setup code here, to run once:
-  Serial.begin(9600);
+  Serial.begin(115200);
 
   // initialise sensors
   ADXL343.initAccel();
@@ -41,7 +44,7 @@ void setup() {
   //initSwitch();
 
   // read in deployment altitude from switch
-  deployAltitude = 1; //getSwitchState();
+  deployAltitude = 2; //getSwitchState();
 
   if (deployAltitude == 0)
   {
@@ -54,6 +57,7 @@ void setup() {
   else
   {
     // check if servo is open. If open close (maybe)
+    startAltitude = 0; // read in altitude 
     // clears EEPROM if altitude is set
     clearEEPROM();
   }
@@ -69,7 +73,7 @@ void loop() {
   else if (deployAltitude == -1)
   {
     // if no reading on all sensors parachute is deployed after 1.5 minutes
-    if(millis() - timeOfAscent > ESTIMATE_FLIGHT_TIME)
+    if(millis() - timeOfAscent > (ESTIMATE_FLIGHT_TIME * 60 * 1000))
     { 
       // open servo
     }
@@ -78,8 +82,12 @@ void loop() {
   {
     // read data from sensors. If non are valid set deployAltitude to -1.
     // fuse sensor data
-
-    // store data in circular buffer
+    
+    if (millis() - prevTime > 5000)
+    {
+      data.addData(LM80_M39.getAltitude(), ADXL343.getAxisAccel());
+      prevTime = millis();
+    }
     
   }
 

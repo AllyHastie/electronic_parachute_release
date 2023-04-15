@@ -18,32 +18,38 @@ void circular_buffer :: addData(float newAltitude, axis newAccel)
     newNode.acceleration.y = newAccel.y;
     newNode.acceleration.z = newAccel.z;
 
+    // increment head index
+    head = (head + 1) % BUFFER_SIZE;
+
     // check if data is stored in previouse node
     DataNode prevNode = getPrevNode();
     if(isEmpty(prevNode) == false)
     {
-        getNextState(prevNode, &newNode);
+        getNextState(&prevNode, &newNode, getNthPrevAltitude(BUFFER_SIZE - 1));
     } else
     {
         // if no previous data set state to armed
         newNode.state = state :: STATE_ARMED;
     }
 
-    // increment head index
-    head = (head + 1) % BUFFER_SIZE;
-
     // store data in new node
     buffer[head]= newNode;
 
     // stores node in EEPROM if conditions are met
-    if (newNode.state != state :: STATE_ARMED || newNode.state != state :: STATE_LANDED)
+    if (newNode.state != state :: STATE_ARMED)
     {
-        if (millis() - prevStore >= readTime)
+        if (newNode.state == state :: STATE_APOGEE)
+        {
+            nvm.writeEEPROM(prevNode, &nvm.startAddress);
+            prevStore = millis();
+        }
+        else if (millis() - prevStore >= (readTime * 1000) || newNode.state != prevNode.state)
         {
             nvm.writeEEPROM(newNode, &nvm.startAddress);
             prevStore = millis();
-        }
+        }  
     }
+    printData(newNode);
 
 }
 
@@ -65,6 +71,72 @@ DataNode circular_buffer :: getPrevNode()
     }
 
     return buffer[prevIndex];
+}
+
+/******************************************************************************
+Function Name: getNthPrevAltitude
+Returns the data stored in the nth previous node
+    Input: N/A
+    Output: altitude
+******************************************************************************/
+float circular_buffer :: getNthPrevAltitude(int n) 
+{
+    // gets index
+    int prevIndex = head - n;
+
+    // checks if index is less than zero
+    if (prevIndex < 0) 
+    {
+        prevIndex += BUFFER_SIZE;
+    }
+
+    return buffer[prevIndex].altitude;
+}
+
+/******************************************************************************
+Function Name: printData
+Prints all data 
+    Input: DataNode
+    Output: N/A
+******************************************************************************/
+
+void printData(DataNode data)
+{
+    Serial.print("Time: ");
+    Serial.println(millis());
+
+    Serial.print("State: ");
+    switch(data.state)
+    {
+        case state :: STATE_ARMED: 
+            Serial.println("ARMED");
+            break;
+        case state :: STATE_ASCENT: 
+            Serial.println("ASCENT");
+            break;
+        case state :: STATE_APOGEE: 
+            Serial.println("APOGEE");
+            break;
+        case state :: STATE_DESCENT: 
+            Serial.println("DESCENT");
+            break;
+        case state :: STATE_LANDED: 
+            Serial.println("LANDED");
+            break;
+        case state :: STATE_ERROR: 
+            Serial.println("ERROR");
+            break;
+    }
+    Serial.print("Z: ");
+    Serial.println(data.acceleration.x);
+    Serial.print("Y: ");
+    Serial.println(data.acceleration.y);
+    Serial.print("Z: ");
+    Serial.println(data.acceleration.z);
+    Serial.print("Altitude: ");
+    Serial.println(data.altitude);
+    Serial.println();
+
 }
 
 /******************************************************************************
