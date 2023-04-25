@@ -8,11 +8,11 @@
 Definitions
 ******************************************************************************/
 #define EEPROM_SIZE 512 // EEPROM size
+#define STRUCT_SIZE 22 // data used when storing struct (bytes)
 #define NUM_VARIABLES 6 // number of variables being read to EEPROM
-#define NUM_FLOAT 4 // number of floats being read to EEPROM
 #define TIME_INDEX 0 // index of time in struct
 #define STATE_INDEX 1 // index of state in struct
-#define STRUCT_SIZE 22 // data used when storing struct (bytes)
+#define NUM_FLOAT 4 // number of floats being read to EEPROM
 
 /******************************************************************************
 Data is stored in EEPROM in the following format:
@@ -25,6 +25,7 @@ Data is stored in EEPROM in the following format:
                                             = 22 bytes 
 The ESP32 is capable of story 512 bytes so ~23 data entries
 ******************************************************************************/
+
 class NVM
 {
   public:
