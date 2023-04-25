@@ -1,6 +1,9 @@
 #ifndef gloabl_variables_h
 #define gloabl_variables_h
 
+/******************************************************************************
+Initialise Global Variables
+******************************************************************************/
 extern int deployAltitude;
 extern int startAltitude;
 extern int timeOfAscent;

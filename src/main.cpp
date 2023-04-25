@@ -36,28 +36,31 @@ circular_buffer data;
 
 void setup() {
   // put your setup code here, to run once:
-  Serial.begin(115200);
-
-  // initialise sensors
-  ADXL343.initAccel();
-  LM80_M39.initGPS();
-  //initSwitch();
 
   // read in deployment altitude from switch
-  deployAltitude = 2; //getSwitchState();
+  deployAltitude = 0; //getSwitchState();
 
   if (deployAltitude == 0)
   {
+    Serial.begin(9600);
     // open servo
   }
   else if (deployAltitude == 1)
   {
+    Serial.begin(9600);
     // close servo
   }
   else
   {
+    // initialise sensors
+    ADXL343.initAccel();
+    LM80_M39.initGPS();
+    //initSwitch();
+
     // check if servo is open. If open close (maybe)
+
     startAltitude = 0; // read in altitude 
+
     // clears EEPROM if altitude is set
     clearEEPROM();
   }
@@ -72,7 +75,7 @@ void loop() {
   }
   else if (deployAltitude == -1)
   {
-    // if no reading on all sensors parachute is deployed after 1.5 minutes
+    // if no reading on all sensors parachute is deployed after estimate flight time
     if(millis() - timeOfAscent > (ESTIMATE_FLIGHT_TIME * 60 * 1000))
     { 
       // open servo
@@ -80,10 +83,9 @@ void loop() {
   }
   else
   {
-    // read data from sensors. If non are valid set deployAltitude to -1.
-    // fuse sensor data
+    // read data from sensors. If none are valid set deployAltitude to -1.
     
-    if (millis() - prevTime > 5000)
+    if (millis() - prevTime > READ_TIME)
     {
       data.addData(LM80_M39.getAltitude(), ADXL343.getAxisAccel());
       prevTime = millis();

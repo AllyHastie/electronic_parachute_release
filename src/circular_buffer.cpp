@@ -43,7 +43,7 @@ void circular_buffer :: addData(float newAltitude, axis newAccel)
             nvm.writeEEPROM(prevNode, &nvm.startAddress);
             prevStore = millis();
         }
-        else if (millis() - prevStore >= (readTime * 1000) || newNode.state != prevNode.state)
+        else if (millis() - prevStore >= (READ_TIME * 1000) || isEmpty(prevNode) == true || newNode.state != prevNode.state)
         {
             nvm.writeEEPROM(newNode, &nvm.startAddress);
             prevStore = millis();
@@ -94,8 +94,9 @@ float circular_buffer :: getNthPrevAltitude(int n)
 }
 
 /******************************************************************************
+TESTING ONLY
 Function Name: printData
-Prints all data 
+Prints all data
     Input: DataNode
     Output: N/A
 ******************************************************************************/

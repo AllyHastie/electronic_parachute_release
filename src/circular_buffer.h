@@ -4,6 +4,7 @@
 #include "global_variables.h"
 #include "nonvolatile_memory.h"
 #include "state_machine.h"
+#include "SoftwareSerial.h"
 
 /******************************************************************************
 Definitions
@@ -11,12 +12,9 @@ Definitions
 // store in EEPROM every 6 seconds
 // based on 2 minute flight time
 // time / number of writes to EEPROM
-// [120, 150] / 23 = [5.21, 6.52]
-#define readTime 6 // seconds
-
+// [120, 150] / 22 = [5.45, 6.82]
+#define READ_TIME 6 // seconds
 #define BUFFER_SIZE 5 // number of nodes stores in buffer
-
-#include "SoftwareSerial.h"
 
 class circular_buffer
 {
