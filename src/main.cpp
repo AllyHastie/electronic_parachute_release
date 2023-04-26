@@ -83,7 +83,8 @@ void loop() {
         // open servo
       }
     }
-    else if (millis() - prevTime > READ_INTERVAL)
+    
+    if (millis() - prevTime > READ_INTERVAL)
     {
       data.addData(LM80_M39.getAltitude(), ADXL343.getAxisAccel());
       prevTime = millis();

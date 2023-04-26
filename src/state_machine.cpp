@@ -58,7 +58,6 @@ int getNextState (DataNode* prevNode, DataNode* currentNode, float nthPrevAltitu
         default: 
             // set error flag
             currentNode->state = state :: STATE_ERROR;
-            deployAltitude = -1;
             return -1;     
     }
     return 0;
