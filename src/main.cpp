@@ -11,7 +11,7 @@ Definitions
 ******************************************************************************/
 #define ACCELEROMETER_ADDRESS 53
 #define ESTIMATE_FLIGHT_TIME 1.5 // minutes
-#define READ_TIME 500 // milliseconds
+#define READ_INTERVAL 500 // milliseconds
 
 /******************************************************************************
 Function Prototypes
@@ -52,7 +52,7 @@ void setup() {
   }
   else
   {
-    // initialise sensors
+    // initialise peripherals
     ADXL343.initAccel();
     LM80_M39.initGPS();
     //initSwitch();
@@ -60,9 +60,6 @@ void setup() {
     // check if servo is open. If open close (maybe)
 
     startAltitude = 0; // read in altitude 
-
-    // clears EEPROM if altitude is set
-    clearEEPROM();
   }
 }
 
@@ -73,19 +70,20 @@ void loop() {
   {
       readUser();
   }
-  else if (deployAltitude == -1)
-  {
-    // if no reading on all sensors parachute is deployed after estimate flight time
-    if(millis() - timeOfAscent > (ESTIMATE_FLIGHT_TIME * 60 * 1000))
-    { 
-      // open servo
-    }
-  }
   else
   {
-    // read data from sensors. If none are valid set deployAltitude to -1.
-    
-    if (millis() - prevTime > READ_TIME)
+    // validates readings from sensors
+    int validGPS = LM80_M39.isGPSValid();
+    // if GPS and barometer are not reading any data
+    if(validGPS == -1)
+    {
+      // if no reading on all sensors parachute is deployed after estimate flight time
+      if(millis() - timeOfAscent > (ESTIMATE_FLIGHT_TIME * 60 * 1000))
+      { 
+        // open servo
+      }
+    }
+    else if (millis() - prevTime > READ_INTERVAL)
     {
       data.addData(LM80_M39.getAltitude(), ADXL343.getAxisAccel());
       prevTime = millis();

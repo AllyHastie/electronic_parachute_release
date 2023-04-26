@@ -10,11 +10,11 @@ class accelerometer{
         accelerometer(int address) : accelAddress(address) {};
         int initAccel();
         axis getAxisAccel();
+        int isAccelValid();
         
     private:
         int accelAddress;
         Adafruit_ADXL343 accel = Adafruit_ADXL343(accelAddress); 
-        int isAccelValid();
 };
 
 
