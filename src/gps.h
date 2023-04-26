@@ -16,11 +16,11 @@ static const uint32_t GPSBaud = 9600;
 class GPS {
     private:
         GPSData storeData();
-        int isGPSValid();
     public: 
         int initGPS();
         GPSData readGPS();
         float getAltitude();
+        int isGPSValid();
 };
 
 #endif
