@@ -40,12 +40,12 @@ void circular_buffer :: addData(float newAltitude, axis newAccel)
     {
         if (newNode.state == state :: STATE_APOGEE)
         {
-            nvm.writeEEPROM(prevNode, &nvm.startAddress);
+           // nvm.writeEEPROM(prevNode, &nvm.startAddress);
             prevStore = millis();
         }
         else if (millis() - prevStore >= (READ_TIME * 1000) || isEmpty(prevNode) == true || newNode.state != prevNode.state)
         {
-            nvm.writeEEPROM(newNode, &nvm.startAddress);
+            //nvm.writeEEPROM(newNode, &nvm.startAddress);
             prevStore = millis();
         }  
     }
