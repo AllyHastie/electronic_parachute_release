@@ -43,7 +43,11 @@ axis accelerometer::getAxisAccel()
     accel.getEvent(&event);
 
     // stores accelerometer data in class axis
-    axis axis = {event.acceleration.x, event.acceleration.y, event.acceleration.z};
+    axis axis = {-1, -1, -1};
+    if(isAccelValid() != -1)
+    {
+        axis = {event.acceleration.x, event.acceleration.y, event.acceleration.z};
+    }
     // returns axis
     return axis;
 }

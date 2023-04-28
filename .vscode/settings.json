@@ -3,6 +3,12 @@
         "array": "cpp",
         "string": "cpp",
         "string_view": "cpp",
-        "*.tcc": "cpp"
+        "*.tcc": "cpp",
+        "optional": "cpp",
+        "random": "cpp",
+        "limits": "cpp",
+        "new": "cpp",
+        "cmath": "cpp",
+        "utility": "cpp"
     }
 }
