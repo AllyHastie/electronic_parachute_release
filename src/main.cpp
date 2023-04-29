@@ -1,9 +1,9 @@
 #include <Arduino.h>
 #include "global_variables.h"
 #include "accelerometer.h"
-#include "gps.h"
+//#include "gps.h"
 #include "circular_buffer.h"
-#include "nonvolatile_memory.h"
+//#include "nonvolatile_memory.h"
 //#include "switch.h"
 
 /******************************************************************************
@@ -30,7 +30,7 @@ double prevTime = 0;
 Initialise Classes
 ******************************************************************************/
 accelerometer ADXL343(ACCELEROMETER_ADDRESS);
-GPS LM80_M39;
+//GPS LM80_M39;
 circular_buffer data;
 
 
@@ -54,7 +54,7 @@ void setup() {
   {
     // initialise peripherals
     ADXL343.initAccel();
-    LM80_M39.initGPS();
+    //LM80_M39.initGPS();
     //initSwitch();
 
     // check if servo is open. If open close (maybe)
@@ -68,14 +68,15 @@ void loop() {
 
   if (deployAltitude == 0 || deployAltitude == 1)
   {
-      readUser();
+      //readUser();
   }
   else
   {
+    
     // validates readings from sensors
-    int validGPS = LM80_M39.isGPSValid();
+    //int validGPS = LM80_M39.isGPSValid();
     // if GPS and barometer are not reading any data
-    if(validGPS == -1)
+    //if(validGPS == -1)
     {
       // if no reading on all sensors parachute is deployed after estimate flight time
       if(millis() - timeOfAscent > (ESTIMATE_FLIGHT_TIME * 60 * 1000))
@@ -86,7 +87,7 @@ void loop() {
     
     if (millis() - prevTime > READ_INTERVAL)
     {
-      data.addData(LM80_M39.getAltitude(), ADXL343.getAxisAccel());
+      //data.addData(LM80_M39.getAltitude(), ADXL343.getAxisAccel());
       prevTime = millis();
     }
     
@@ -101,6 +102,7 @@ EEPROM.
     Input: N/A
     Output: N/A
 ******************************************************************************/
+/*
 void readUser()
 {
   String incomingData = Serial.readString();
@@ -129,3 +131,4 @@ void readUser()
       }
     }
 }
+*/

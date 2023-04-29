@@ -8,43 +8,40 @@ Reads data struct to ROM.
 ******************************************************************************/
 void NVM :: writeEEPROM(DataNode data, int* startAddress)
 {
-    // initialises EEPROM
-    EEPROM.begin(EEPROM_SIZE);
-
     if (*startAddress <= (EEPROM_SIZE - STRUCT_SIZE))
     {
         // initialises temporary vairables
         float tmp;
-        int dataSize;
 
         // writes time in milliseconds to EEPROM
-        EEPROM.writeInt(*startAddress, millis());
-        *startAddress += sizeof(int);
+        eeprom_write_word((uint16_t*) *startAddress, (short int) (millis()/1000));
+        *startAddress += WORD_SIZE;
+        Serial.println(*startAddress);
 
         // writes state as integer to EEPROM
         switch(data.state)
         {
             case state :: STATE_ARMED:
-                EEPROM.writeShort(*startAddress, 1);
+                eeprom_write_byte((uint8_t*) *startAddress, 1);
                 break;
             case state :: STATE_ASCENT:
-                EEPROM.writeShort(*startAddress, 2);
+                eeprom_write_byte((uint8_t*) *startAddress, 2);
                 break;
             case state :: STATE_APOGEE:
-                EEPROM.writeShort(*startAddress, 3);
+                eeprom_write_byte((uint8_t*) *startAddress, 3);
                 break;
             case state :: STATE_DESCENT:
-                EEPROM.writeShort(*startAddress, 4);
+                eeprom_write_byte((uint8_t*) *startAddress, 4);
                 break;
             case state :: STATE_ERROR:
-                EEPROM.writeShort(*startAddress, 0);
+                eeprom_write_byte((uint8_t*) *startAddress, 0);
                 break;
             default:
-                EEPROM.writeShort(*startAddress, 0);
+                eeprom_write_byte((uint8_t*) *startAddress, 0);
 
                 
         }
-        *startAddress += sizeof(short int);
+        *startAddress += BYTE_SIZE;
 
         // writes acceleration and alititude to EEPROM
         for (int i = 0; i < NUM_FLOAT; i++)
@@ -66,13 +63,11 @@ void NVM :: writeEEPROM(DataNode data, int* startAddress)
             }
 
             // check for null and unset variables
-            EEPROM.writeFloat(*startAddress, tmp);
-            *startAddress += sizeof(float);
+            eeprom_write_word((uint16_t*) *startAddress, (short int) tmp);
+            *startAddress += WORD_SIZE;
         }
 
-        EEPROM.commit();
     }
-    EEPROM.end();
 }
 
 /******************************************************************************
@@ -86,25 +81,22 @@ void readEEPROM()
     // initialises start address as 0 to read from EEPROM
     int start = 0;
 
-    // initialises EEPROM
-    EEPROM.begin(EEPROM_SIZE);
-
     // writes header for data in CSV format
-    Serial.println("Time (milliseconds);State;Acceleration (X);Acceleration (Y);Acceleration (Z);Altitude (m)");
-    
-    while (EEPROM.read(start) != 0)
+    Serial.println("Time (seconds);State;Acceleration (X);Acceleration (Y);Acceleration (Z);Altitude (m)");
+    while(start <= (EEPROM_SIZE - STRUCT_SIZE))
     {
         for(int i = 0; i < NUM_VARIABLES; i++)
         {
 
             if(i == TIME_INDEX)
             {
-                Serial.print(EEPROM.readInt(start));
-                start += sizeof(int);
+                short int tmp = eeprom_read_word((uint16_t*) start);
+                Serial.print(tmp);
+                start += WORD_SIZE;
             }
             else if(i == STATE_INDEX)
             {
-                int state = EEPROM.readShort(start);
+                int state = eeprom_read_byte((uint8_t*) start);
                 switch(state)
                 {
                     case 1: 
@@ -126,12 +118,13 @@ void readEEPROM()
                         Serial.print("ERROR");
                         break;
                 }
-                start += sizeof(short int);
+                start += BYTE_SIZE;
             }
             else
             {
-                Serial.print(EEPROM.readFloat(start));
-                start += sizeof(float);
+                short int tmp = eeprom_read_word((uint16_t*) start);
+                Serial.print(tmp);
+                start += WORD_SIZE;
             }
             if(i < (NUM_VARIABLES-1))
             {
@@ -152,11 +145,12 @@ Clears all data in EEPROM.
 ******************************************************************************/
 void clearEEPROM()
 {
-    EEPROM.begin(EEPROM_SIZE);
     for (int i = 0 ; i < EEPROM_SIZE ; i++) 
     {
-        EEPROM.write(i, 0);
+        eeprom_write_byte((uint8_t*) i, i);
     }
-    EEPROM.end();
     
 }
+
+
+

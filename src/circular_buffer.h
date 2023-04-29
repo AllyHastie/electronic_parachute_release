@@ -2,7 +2,7 @@
 #define circular_buffer_h
 
 #include "global_variables.h"
-#include "nonvolatile_memory.h"
+//#include "nonvolatile_memory.h"
 #include "state_machine.h"
 #include "SoftwareSerial.h"
 
@@ -22,7 +22,7 @@ class circular_buffer
         int head = 0; 
         int prevStore = 0;
         DataNode buffer[BUFFER_SIZE];
-        NVM nvm;
+        //NVM nvm;
     public:
         void addData(float newAltitude, axis newAccel);
         DataNode getPrevNode();
